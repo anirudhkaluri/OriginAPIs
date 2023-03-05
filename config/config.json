@@ -5,7 +5,7 @@
     "database": "origindb",
     "host": "localhost",
     "dialect": "sqlite",
-    "storage":"./Dao"
+    "storage":"./origindb.sqlite"
   },
   "test": {
     "username": "root",

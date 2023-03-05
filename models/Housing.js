@@ -1,4 +1,4 @@
-const User=require("User");
+const User=require("./User");
 module.exports=(sequelize,DataTypes)=>{
     const Housing=sequelize.define("Housing",{
         user_id:{
@@ -6,7 +6,7 @@ module.exports=(sequelize,DataTypes)=>{
             allowNull:false,
             references:{
                 model:User,
-                key: user_id,
+                key: "user_id",
             }
         },
         ownership_status:{

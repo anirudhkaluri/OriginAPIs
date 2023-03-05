@@ -1,8 +1,8 @@
 {
-  "name": "originapi",
+  "name": "origin",
   "version": "1.0.0",
   "description": "api suggests insurance plans",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

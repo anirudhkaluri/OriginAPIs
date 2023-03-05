@@ -1,4 +1,6 @@
-const {User,Vehicle,Housing}=require('../models');
+// const {User}=require('../models/User');
+// const {Vehicle}=require('../models/Vehicle');
+// const {Housing}=require('../models/Housing');
 
 
 const create_user=(req,res)=>{
