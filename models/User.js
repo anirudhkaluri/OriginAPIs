@@ -1,0 +1,42 @@
+module.exports=(sequelize,DataTypes)=>{
+    const User=sequelize.define("Users",{
+        user_id:{
+            type:DataTypes.INTEGER,
+            primaryKey:true,
+            autoIncrement:true,
+        },
+        Age:{
+            type:DataTypes.INTEGER,
+            allowNull:false
+        },
+        dependents_count:{
+            type:DataTypes.INTEGER,
+            allowNull:false,
+            defaultValue:0,
+        },
+        income:{
+            type:DataTypes.INTEGER,
+            allowNull:false,
+            defaultValue:0
+        },
+        marital_status:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        risk_answers:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        possess_vehicle:{
+            type:DataTypes.BOOLEAN,
+            allowNull:false,
+            defaultValue:false
+        },
+        possess_house:{
+            type:DataTypes.BOOLEAN,
+            allowNull:false,
+            defaultValue:false
+        }
+    });
+    return User;
+}
