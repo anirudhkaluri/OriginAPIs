@@ -21,7 +21,10 @@ module.exports=(sequelize,DataTypes)=>{
         },
         marital_status:{
             type:DataTypes.STRING,
-            allowNull:false
+            allowNull:false,
+            validate:{
+                isIn:[['single','married']]
+            }
         },
         risk_answers:{
             type:DataTypes.STRING,
