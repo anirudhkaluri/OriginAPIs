@@ -1,6 +1,7 @@
 const {User,Vehicle,Housing}=require('../models');
 const addUser=require('../Dao/insertUser');
 const addHouse=require('../Dao/insertHousing');
+const addVehicle=require('../Dao/insertVehicle');
 
 
 
@@ -39,27 +40,14 @@ const create_user=(req,res)=>{
             .then(res=>console.log('saved housing details'))
             .catch(err=>console.log('error saving housing details'+err));
         }
-        if(vehicle){ //saved_usr shouldnt be null if we deleted in the housing portion
-            Vehicle.create({
-                user_id:saved_user.user_id,
-                vehicle_production_date:user.vehicle.year
-            })
-            .then((data)=>{
-                console.log(`we saved the vehicle details of user with user id ${saved_user.user_id}`);
-            })
-            .catch((err)=>{
-                console.log(`failed to save the vehicle details of user with user id ${saved_user.user_id}`);
-                console.log(err);
-                //TO-DO DELETE THE ENTRY IN USER TABLE AND HOUSING TABLE
-            });
+        if(vehicle){ 
+            const vehicle_obj={user_id:saved_user.user_id,vehicle_production_date:user.vehicle.year};
+            addVehicle(vehicle_obj)
+            .then(res=>console.log('inserted vehicle into the table'))
+            .catch(err=>console.log('error inserting vehicle into the table'));
         }
-
-
     })
-    .catch((err)=>{
-        console.log("Error Saving User");
-        console.log(err);
-    });
+    .catch(err=>console.log('error saving user'));
 
     res.send(user);
 }
