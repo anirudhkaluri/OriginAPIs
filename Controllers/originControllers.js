@@ -1,5 +1,6 @@
 const {User,Vehicle,Housing}=require('../models');
 const addUser=require('../Dao/insertUser');
+const addHouse=require('../Dao/insertHousing');
 
 
 
@@ -19,7 +20,7 @@ const create_user=(req,res)=>{
     if(user.hasOwnProperty('house'))
         housing=true;
     
-    const obj={
+    const user_obj={
         Age:user.age,
         dependents_count:user.dependents,
         income:user.income,
@@ -30,34 +31,13 @@ const create_user=(req,res)=>{
 
     };
     
-    //  User.create({
-    //     Age:user.age,
-    //     dependents_count:user.dependents,
-    //     income:user.income,
-    //     marital_status:user.marital_status,
-    //     possess_vehicle:vehicle,
-    //     possess_house:housing,
-    //     risk_answers:risk_answers_string
-
-    // })
-    addUser(obj)
+    addUser(user_obj)
     .then((saved_user)=>{
-        console.log("---------------------------User saved successfully---------------------");
-        console.log(`saved_users age is ${saved_user.Age}`)
         if(housing){
-            Housing.create({
-                user_id:saved_user.user_id,
-                ownership_status:user.house.ownership_status
-            })
-            .then((data)=>{
-                console.log(`we saved the housing details of the user with user_id=${saved_user.user_id} `);
-              
-            })
-            .catch((err)=>{
-                console.log(`failed to save housing details of user with user_id= ${saved_user.user_id}`);
-                console.log(err);
-                  //TO-DO DELETE THE ENTRY IN THE USER TABLE TOO
-            });
+            const house_obj={user_id:saved_user.user_id,ownership_status:user.house.ownership_status};
+            addHouse(house_obj)
+            .then(res=>console.log('saved housing details'))
+            .catch(err=>console.log('error saving housing details'+err));
         }
         if(vehicle){ //saved_usr shouldnt be null if we deleted in the housing portion
             Vehicle.create({
