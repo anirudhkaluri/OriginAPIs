@@ -1,6 +1,8 @@
-const {User}=require('../models');
-const {Vehicle}=require('../models');
-const {Housing}=require('../models');
+const {User,Vehicle,Housing}=require('../models');
+const addUser=require('../Dao/insertUser');
+
+
+
 
 
 const create_user=(req,res)=>{
@@ -17,7 +19,7 @@ const create_user=(req,res)=>{
     if(user.hasOwnProperty('house'))
         housing=true;
     
-     User.create({
+    const obj={
         Age:user.age,
         dependents_count:user.dependents,
         income:user.income,
@@ -26,7 +28,19 @@ const create_user=(req,res)=>{
         possess_house:housing,
         risk_answers:risk_answers_string
 
-    })
+    };
+    
+    //  User.create({
+    //     Age:user.age,
+    //     dependents_count:user.dependents,
+    //     income:user.income,
+    //     marital_status:user.marital_status,
+    //     possess_vehicle:vehicle,
+    //     possess_house:housing,
+    //     risk_answers:risk_answers_string
+
+    // })
+    addUser(obj)
     .then((saved_user)=>{
         console.log("---------------------------User saved successfully---------------------");
         console.log(`saved_users age is ${saved_user.Age}`)
@@ -67,7 +81,7 @@ const create_user=(req,res)=>{
         console.log(err);
     });
 
-    res.send(`{"response":"lol"}`);
+    res.send(user);
 }
 
 const calculate_risk=(req,res)=>{
