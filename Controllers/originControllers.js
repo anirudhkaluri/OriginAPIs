@@ -8,9 +8,8 @@ const addVehicle=require('../Dao/insertVehicle');
 
 
 const create_user=(req,res)=>{
+
     const user=req.body;
-    console.log("the user is:"+user);
-    console.log("the age is:"+user.age);
     var vehicle=false;
     var housing=false;
     var risk_answers_array=user.risk_questions;
@@ -47,10 +46,11 @@ const create_user=(req,res)=>{
             .catch(err=>console.log('error inserting vehicle into the table'));
         }
     })
-    .catch(err=>console.log('error saving user'));
+    .catch(err=>console.log('error saving user'+err));
 
     res.send(user);
 }
+
 
 const calculate_risk=(req,res)=>{
 

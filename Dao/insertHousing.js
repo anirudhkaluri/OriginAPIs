@@ -1,7 +1,7 @@
-const Housing=require('../models');
+const {Housing}=require('../models');
 
-function addHouse(house){
-    return Housing.create(house);
+function addHouse(house_obj){
+    return Housing.create(house_obj);
 }
 
 module.exports=addHouse;

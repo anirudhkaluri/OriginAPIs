@@ -1,7 +1,7 @@
-const Vehicle=require('../models');
+const {Vehicle}=require('../models');
 
-function addVehicle(veh_obj){
-    return Vehicle.create(veh_obj);
+function addVehicle(vehicle_obj){
+    return Vehicle.create(vehicle_obj);
 }
 
 module.exports=addVehicle;
