@@ -35,15 +35,11 @@ const create_user=(req,res)=>{
     .then((saved_user)=>{
         if(housing){
             const house_obj={user_id:saved_user.user_id,ownership_status:user.house.ownership_status};
-            addHouse(house_obj)
-            .then(res=>console.log('saved housing details'))
-            .catch(err=>console.log('error saving housing details'+err));
+            addHouse(house_obj);
         }
         if(vehicle){ 
             const vehicle_obj={user_id:saved_user.user_id,vehicle_production_date:user.vehicle.year};
-            addVehicle(vehicle_obj)
-            .then(res=>console.log('inserted vehicle into the table'))
-            .catch(err=>console.log('error inserting vehicle into the table'));
+            addVehicle(vehicle_obj);
         }
     })
     .catch(err=>console.log('error saving user'+err));
@@ -53,6 +49,8 @@ const create_user=(req,res)=>{
 
 
 const calculate_risk=(req,res)=>{
+    const user_id=req.params.uid;
+    var user=getUser(user_id);
 
 }
 
