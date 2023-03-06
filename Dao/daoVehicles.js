@@ -6,4 +6,8 @@ function addVehicle(vehicle_obj){
     .catch(err=>console.log('error inserting vehicle into the table'));
 }
 
-module.exports=addVehicle;
+function get_production_year(user){
+
+}
+
+module.exports={addVehicle,get_production_year};

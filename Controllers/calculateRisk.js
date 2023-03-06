@@ -1,5 +1,5 @@
 const {Vehicle,Housing}= require('../models');
-
+const {get_production_year}=require('../Dao/daoVehicles');
 
 const calculate_auto_risk=(user)=>{
     if(user.income===0 || user.possess_vehicle===false || user.possess_house===false)
