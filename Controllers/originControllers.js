@@ -12,6 +12,7 @@ const {calculate_auto_risk,calculate_disability_risk,calculate_home_risk,calcula
 const create_user=(req,res)=>{
 
     const user=req.body;
+    var user_created=null;
     var vehicle=false;
     var housing=false;
     var risk_answers_array=user.risk_questions;
@@ -35,6 +36,7 @@ const create_user=(req,res)=>{
     
     addUser(user_obj)
     .then((saved_user)=>{
+        user_created=saved_user;
         if(housing){
             const house_obj={user_id:saved_user.user_id,ownership_status:user.house.ownership_status};
             addHouse(house_obj);
@@ -45,7 +47,7 @@ const create_user=(req,res)=>{
         }
     })
     .catch(err=>console.log('error saving user'+err));
-    res.send(user);
+    res.json(user_created);
 }
 
 
@@ -58,12 +60,14 @@ const calculate_risk= async (req,res)=>{
         const disability_plan=calculate_disability_risk(user);
         const home_plan=calculate_home_risk(user);
         const life_plan=calculate_life_risk(user);
-        json_response=`{"auto":${auto_plan},"disability":${disability_plan},"home":${home_plan},"life":${life_plan},}`;
+       // json_response=`{"auto":${auto_plan},"disability":${disability_plan},"home":${home_plan},"life":${life_plan},}`;
+       json_response={"auto":auto_plan,"disability":disability_plan,"home":home_plan,"life":life_plan};
     }
     else
-        json_rsponse=`{"userStatus":"not found"}`;
+       // json_rsponse=`{"userStatus":"not found"}`;
+       json_rsponse={"userStatus":"not found"};
     
-    res.send(json_response);
+    res.json(json_response);
 
 }
 
