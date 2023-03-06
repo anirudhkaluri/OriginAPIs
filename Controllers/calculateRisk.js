@@ -1,5 +1,6 @@
 const {Vehicle,Housing}= require('../models');
 const {get_production_year}=require('../Dao/daoVehicles');
+const {get_house_ownership}=require('../Dao/daoHousing');
 
 const calculate_auto_risk=(user)=>{
     if(user.income===0 || user.possess_vehicle===false || user.possess_house===false)
@@ -8,7 +9,7 @@ const calculate_auto_risk=(user)=>{
     if(user.Age<30) base_risk=base_risk-2;
     if(user.Age>30 && user.Age<40) base_risk=base_risk-1;
     if(user.income>200000) base_risk=base_risk-1;
-    const vehicle_produced_year=get_production_year(user); //TO-DO implement get_production_year, export and import it here
+    const vehicle_produced_year=get_production_year(user); 
     if(2023-vehicle_produced_year<5) base_risk=base_risk+1;
     if(base_risk<=0)    return "economic";
     if(base_risk===1 || base_risk===2) return "regular";
@@ -24,7 +25,7 @@ const calculate_disability_risk=(user)=>{
     if(user.Age<30) base_risk=base_risk-2;
     if(user.Age>30 && user.Age<40) base_risk=base_risk-1;
     if(user.income>200000) base_risk=base_risk-1;
-    const ownership_status=get_house_ownership(user); //TO-DO implement getOwnership, export, and import it here
+    const ownership_status=get_house_ownership(user); //TO-DO implement getOwnership
     if(owernship_status==='mortgaged')
         base_risk=base_risk+1;
     if(user.dependents_count>0)

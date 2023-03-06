@@ -6,4 +6,8 @@ function addHouse(house_obj){
     .catch(err=>console.log('error saving housing details'+err));
 }
 
-module.exports=addHouse;
+function get_house_ownership(user){
+
+}
+
+module.exports={addHouse,get_house_ownership};
