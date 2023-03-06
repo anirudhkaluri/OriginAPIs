@@ -43,7 +43,6 @@ const create_user=(req,res)=>{
         }
     })
     .catch(err=>console.log('error saving user'+err));
-
     res.send(user);
 }
 
@@ -51,6 +50,21 @@ const create_user=(req,res)=>{
 const calculate_risk=(req,res)=>{
     const user_id=req.params.uid;
     var user=getUser(user_id);
+    // var possess_vehicle=false;
+    // var possess_house=false;
+    var json_response=null;
+    if(user!==null){
+       // const base_risk=parseInt(user.risk_answers[0])+parseInt(user.risk_answers[1])+parseInt(user.risk_answers[2]);
+        const auto_plan=calculate_auto_risk(user);
+        const disability_plan=calculate_disability_risk(user);
+        const home_plan=calculate_home_risk(user);
+        const life_plan=calculate_life_risk(user);
+        json_response=`{"auto":${auto_plan},"disability":${disability_plan},"home":${home_plan},"life":${life_plan},}`;
+    }
+    else
+        json_rsponse=`{"userStatus":"not found"}`;
+    
+    res.send(json_response);
 
 }
 
