@@ -7,7 +7,11 @@ function addVehicle(vehicle_obj){
 }
 
 function get_production_year(user){
-
+    Vehicle.findByPk(user.user_id)
+    .then((res)=>{
+        return res.vehicle_production_date;
+    })
+    .catch(err=>console.log(`error fetching vehicle production date in daoVehicle ${err}`));
 }
 
 module.exports={addVehicle,get_production_year};
