@@ -3,6 +3,8 @@ const addUser=require('../Dao/insertUser');
 const addHouse=require('../Dao/insertHousing');
 const addVehicle=require('../Dao/insertVehicle');
 
+const {calculate_auto_risk,calculate_disability_risk,calculate_home_risk,calculate_life_risk}=require('./calculateRisk');
+
 
 
 
