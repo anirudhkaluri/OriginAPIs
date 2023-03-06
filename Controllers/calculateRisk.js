@@ -8,6 +8,7 @@ const calculate_auto_risk=(user)=>{
     if(user.Age<30) base_risk=base_risk-2;
     if(user.Age>30 && user.Age<40) base_risk=base_risk-1;
     if(user.income>200000) base_risk=base_risk-1;
+    const vehicle_produced_year=get_production_year(user); //TO-DO implement get_production_year, export and import it here
     if(base_risk<=0)    return "economic";
     if(base_risk===1 || base_risk===2) return "regular";
     if(base_risk===3) return "responsible";
@@ -56,7 +57,18 @@ const calculate_home_risk=(user)=>{
 
 
 const calculate_life_risk=(user)=>{
-    
+    if(user.Age>60)
+        return 'ineligible';
+    if(user.Age<30) base_risk=base_risk-2;
+    if(user.Age>30 && user.Age<40) base_risk=base_risk-1;
+    if(user.income>200000) base_risk=base_risk-1;
+    if(user.dependents_count>0) base_risk=base_risk+1;
+    if(user.marital_status==="married") base_risk=base_risk+1;
+    if(base_risk<=0)    return "economic";
+    if(base_risk===1 || base_risk===2) return "regular";
+    if(base_risk===3) return "responsible";
+    return "ineligible";
+
 }
 
 
