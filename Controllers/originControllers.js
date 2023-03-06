@@ -49,9 +49,9 @@ const create_user=(req,res)=>{
 }
 
 
-const calculate_risk=(req,res)=>{
+const calculate_risk= async (req,res)=>{
     const user_id=req.params.uid;
-    var user=getUser(user_id);
+    var user= await getUser(user_id);
     var json_response=null;
     if(user!==null){
         const auto_plan=calculate_auto_risk(user);
