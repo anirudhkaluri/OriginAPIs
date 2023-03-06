@@ -1,5 +1,5 @@
 const {User,Vehicle,Housing}=require('../models');
-const {addUser}=require('../Dao/daoUser');
+const {addUser,getUser}=require('../Dao/daoUser');
 const {addHouse}=require('../Dao/daoHousing');
 const {addVehicle}=require('../Dao/daoVehicle');
 
@@ -52,11 +52,8 @@ const create_user=(req,res)=>{
 const calculate_risk=(req,res)=>{
     const user_id=req.params.uid;
     var user=getUser(user_id);
-    // var possess_vehicle=false;
-    // var possess_house=false;
     var json_response=null;
     if(user!==null){
-       // const base_risk=parseInt(user.risk_answers[0])+parseInt(user.risk_answers[1])+parseInt(user.risk_answers[2]);
         const auto_plan=calculate_auto_risk(user);
         const disability_plan=calculate_disability_risk(user);
         const home_plan=calculate_home_risk(user);
