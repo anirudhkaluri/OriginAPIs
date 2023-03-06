@@ -11,9 +11,6 @@ app.use(express.urlencoded());
 app.use(apiRoutes);
 
 
-
-
-
 db.sequelize.sync()
 .then((res)=>{
     app.listen(3000,()=>{
@@ -25,6 +22,7 @@ db.sequelize.sync()
     console.log(err);
 });
 
+module.exports=app;
 
 
 
