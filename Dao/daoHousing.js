@@ -7,7 +7,11 @@ function addHouse(house_obj){
 }
 
 function get_house_ownership(user){
-
+    Housing.findByPk(user.user_id)
+    .then((res)=>{
+        return res.ownership_status;
+    })
+    .catch(err=>console.log(`error fetching house ownership status ${err}`));
 }
 
 module.exports={addHouse,get_house_ownership};
