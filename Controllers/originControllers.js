@@ -1,7 +1,7 @@
 const {User,Vehicle,Housing}=require('../models');
-const addUser=require('../Dao/insertUser');
-const addHouse=require('../Dao/insertHousing');
-const addVehicle=require('../Dao/insertVehicle');
+const {addUser}=require('../Dao/daoUser');
+const {addHouse}=require('../Dao/daoHousing');
+const {addVehicle}=require('../Dao/daoVehicle');
 
 const {calculate_auto_risk,calculate_disability_risk,calculate_home_risk,calculate_life_risk}=require('./calculateRisk');
 
